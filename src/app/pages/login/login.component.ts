@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     .subscribe(result=> {
       localStorage.setItem(AppConstants.JWT_TOKEN_STORAGE_NAME, result.body.token);
       if (this.loginForm.value.usertype == 'SHOPKEEPER') {
-        this.router.navigate(['/shopkeeper-dashboard']);
+        this.router.navigate(['/shopkeeper']);
       }
     },
     error=> {

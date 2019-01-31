@@ -13,7 +13,7 @@ export class LoginService {
   login(username, password, usertype): Observable<any> {
     var httpHeader = new HttpHeaders();
     httpHeader = httpHeader.set('Authorization', 'Basic '+ btoa(username + ':' + password))
-                .set('x-role', usertype);  
+                .set(AppConstants.X_ROLE, usertype);  
     return this.httpClient.post(AppConstants.BASE_SERVER_API_URL + '/login', {}, {headers: httpHeader, observe: 'response'});
   }
 }

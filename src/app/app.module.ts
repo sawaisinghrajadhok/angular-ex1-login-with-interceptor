@@ -9,17 +9,22 @@ import { BasicAuthInterceptor } from '../app/_helper/basic-auth.interceptor';
 import { ShopkeeperDashboardComponent } from './pages/shopkeeper-dashboard/shopkeeper-dashboard.component';
 import { ProductsListComponent } from './pages/shopkeeper-dashboard/products-list/products-list.component';
 import { OrdersListComponent } from './pages/shopkeeper-dashboard/orders-list/orders-list.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {NgbdModalBasic} from '../app/pages/modalsss/modal-basic';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AddProductComponent} from '../app/pages/shopkeeper-dashboard/product-add/add-product.component';
+import { PageNotFoundComponent } from '../app/pages/page-not-found/page-not-found.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes : Route[] = [
-  {path: '', component: LoginComponent},
+  {path: '', component: HomeComponent, pathMatch: 'full', },
+  {path: 'login', component: LoginComponent, pathMatch: 'full'},
   {path: 'shopkeeper', component: ShopkeeperDashboardComponent,
     children: [
       {path: 'products', component: ProductsListComponent},
       {path: 'orders', component: OrdersListComponent}
     ]
-  }
+  },
+  {path: 'not-found', component: PageNotFoundComponent},
+  {path: '**', redirectTo: '/not-found'}
 ]
 
 @NgModule({
@@ -29,14 +34,16 @@ const routes : Route[] = [
     ShopkeeperDashboardComponent,
     ProductsListComponent,
     OrdersListComponent,
-    NgbdModalBasic
+    AddProductComponent,
+    PageNotFoundComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

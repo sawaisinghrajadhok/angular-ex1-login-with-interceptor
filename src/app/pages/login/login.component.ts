@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from '../../providers/login.service';
 import { Router } from '@angular/router';
 import { AppConstants } from '../../constant';
@@ -20,16 +20,12 @@ export class LoginComponent implements OnInit {
   
   }
   loginForm = this.fb.group({
-    username: [''],
-    password: [''],
-    usertype: ['']
+    username: ['', [Validators.required]],
+    password: ['', [Validators.required]],
+    usertype: ['CUSTOMER', [Validators.required]]
   });
 
   loginSubmit() {
-    console.log('login submit called');
-    console.log('username ' + this.loginForm.value.username);
-    console.log('password' +  this.loginForm.value.password);
-    console.log('usertype' + this.loginForm.value.usertype);
     this.LoginService.login(this.loginForm.value.username, this.loginForm.value.password, this.loginForm.value.usertype)
     .subscribe(result=> {
       localStorage.setItem(AppConstants.JWT_TOKEN_STORAGE_NAME, result.body.token);

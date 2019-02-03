@@ -1,0 +1,8 @@
+.form-group {
+    margin-bottom: 0rem;
+}
+
+.required-field::after {
+    content: "*";
+    color: red;
+}

@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="topnav">
+    <form [formGroup]="searchProductForm" (ngSubmit)="search()">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-9">
+          <div class="row">
+            <div class="col-md-2">
+              <select class="form-control margin" formControlName="productType">
+                <option value="ALL" [selected]="true">All</option>
+                <option value="OTHER">Other</option>
+                <option value="SHOES">Shoes</option>
+                <option value="WATCH">Watch</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <select class="form-control margin" formControlName="customerType">
+                <option value="All" [selected]="true">All</option>
+                <option value="MALE">Male</option>
+                <option value="FEMALE">Female</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <input type="text" class="form-control margin" formControlName="startPrice" placeholder="Start price">
+            </div>
+            <div class="col-md-2">
+              <input type="text" class="form-control margin" formControlName="endPrice" placeholder="End price">
+            </div>
+            <div class="col-md-2">
+              <input type="text" class="form-control margin" formControlName="name" placeholder="Name" name="search">
+            </div>
+            <div class="col-md-1">
+                  <button type="submit" class="btn btn-success margin">Search</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-link margin" routerLink="/login">Register & Login</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+

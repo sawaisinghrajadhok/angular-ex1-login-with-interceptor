@@ -1,0 +1,12 @@
+.title {
+    margin-bottom: 40px; text-align: center;
+  }  
+  
+  .required-field::after {
+    content: "*";
+    color: red;
+  }
+
+.top-margin-user-type {
+  margin-top: 50px;
+} 

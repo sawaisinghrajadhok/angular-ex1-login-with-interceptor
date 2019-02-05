@@ -1,62 +1,9 @@
-<ng-template #editProductContent id = "editProductContent" let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Edit Product</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form [formGroup]="editProductForm">
-      <div class="form-group form-group">
-        <label>Name: </label>
-        <input class="form-control" type="text" formControlName="name">
-      </div>
-
-      <div class="form-group form-group">
-        <label>Price:</label>
-        <input class="form-control" type="text" formControlName="price">
-      </div>
-
-      <div class="form-group form-group">
-        <label>Quantity:</label>
-        <input class="form-control" type="text" formControlName="quantity">
-      </div>
-
-      <div class="form-group form-group">
-        <label>Description:</label>
-        <input class="form-control" type="text" formControlName="description">
-      </div>
-
-      <div class="form-group form-group">
-        <label>Customer Type:</label>
-        <select class="form-control" formControlName="customerType">
-          <option value="ALL">All</option>
-          <option value="MALE">Male</option>
-          <option value="FEMALE">Female</option>  
-        </select>
-      </div>
-
-      <div class="form-group form-group">
-        <label>Product Type:</label>
-        <select class="form-control" formControlName="productType">
-          <option value="OTHER">Other</option>
-          <option value="CLOTH">Cloth</option>
-          <option value="SHOES">Shoes</option>
-          <option value="WATCH">Watch</option>
-        </select>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-success" [disabled]="!(editProductForm.valid && editProductForm.touched)" (click)="updateProduct()">Update</button>
-  </div>
-</ng-template>
-
-
 <div>
   <div class="container-fluid">
     <br>
-    <span style="float:right;"> <add-product></add-product></span>
+    <span style="float:right;">
+      <button class="btn" data-toggle="modal" (click)="openAddProductModal()">Add</button>  
+    </span>
     <table class="table table-striped table-bordered" *ngIf="products">
       <thead>
         <tr>
@@ -82,7 +29,7 @@
           <td>{{product.quantity}}</td>
           <td>{{product.createdAt | date: 'dd-MM-y h:mm a' : '+0530'}}</td>
           <td>
-            <button type="button" class="btn btn-link" (click)="editProductPopup(editProductContent, product)">Edit</button>
+            <app-products-edit [data]="product" (dataRefractEmitters)="realoadAllProducts()"></app-products-edit>
             <button type="button" class="btn btn-link" (click)="deleteProduct(product._id)">Delete</button>
           </td>
         </tr>
@@ -91,3 +38,4 @@
   </div>
 </div>    
 
+<add-product (dataRefractEmitter)="realoadAllProducts()"></add-product>

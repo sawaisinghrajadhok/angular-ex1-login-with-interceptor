@@ -1,0 +1,55 @@
+<ng-template #editProductContent id = "editProductContent" let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit Product</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="editProductForm">
+      <div class="form-group form-group">
+        <label>Name: </label>
+        <input class="form-control" type="text" formControlName="name">
+      </div>
+
+      <div class="form-group form-group">
+        <label>Price:</label>
+        <input class="form-control" type="text" formControlName="price">
+      </div>
+
+      <div class="form-group form-group">
+        <label>Quantity:</label>
+        <input class="form-control" type="text" formControlName="quantity">
+      </div>
+
+      <div class="form-group form-group">
+        <label>Description:</label>
+        <input class="form-control" type="text" formControlName="description">
+      </div>
+
+      <div class="form-group form-group">
+        <label>Customer Type:</label>
+        <select class="form-control" formControlName="customerType">
+          <option value="BOTH">Both</option>
+          <option value="MALE">Male</option>
+          <option value="FEMALE">Female</option>  
+        </select>
+      </div>
+
+      <div class="form-group form-group">
+        <label>Product Type:</label>
+        <select class="form-control" formControlName="productType">
+          <option value="OTHER">Other</option>
+          <option value="CLOTH">Cloth</option>
+          <option value="SHOES">Shoes</option>
+          <option value="WATCH">Watch</option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" [disabled]="!(editProductForm.valid && editProductForm.touched)" (click)="updateProduct()">Update</button>
+  </div>
+</ng-template>
+
+<button class="btn btn-primary" (click)="openEditModal(editProductContent)">edit</button>

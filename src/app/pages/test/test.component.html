@@ -1,0 +1,9 @@
+<div class="container">
+<div class="col-md-10 col-md-offset-1">
+  <flx-ui-datatable
+    [headers]="['Name', 'Price', 'Quanity']"
+    [dataKeys]="['name', 'price', 'quantity']"
+    dataUrl="http://localhost:3001/products?customerType=ALL&productType=&name=&startPrice=&endPrice="
+    ></flx-ui-datatable>
+</div>
+</div>

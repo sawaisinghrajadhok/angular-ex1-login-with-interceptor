@@ -14,14 +14,13 @@ export class BasicAuthInterceptor implements HttpInterceptor {
         console.log('Comming with basic auth : ' + basicAuth);
         if (request.url.indexOf('login') < 0) {
             let token = localStorage.getItem(AppConstants.JWT_TOKEN_STORAGE_NAME);
-            if (token) {
-                console.log('inside token not null');
+ //           if (token) {
                 request = request.clone({
                     setHeaders : {Authorization: 'Bearer ' + token}  
                 });
-            } else {
-                console.log('Please re-direct to login page. Because no jwt-token or basic auth.');
-            }
+   //         } else {
+     //           console.log('Please re-direct to login page. Because no jwt-token or basic auth.');
+      //      }
         }
         return next.handle(request)
             .pipe(map((event: HttpEvent<any>)=> {

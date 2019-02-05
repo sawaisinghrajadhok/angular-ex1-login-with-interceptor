@@ -13,6 +13,10 @@ import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AddProductComponent} from '../app/pages/shopkeeper-dashboard/product-add/add-product.component';
 import { PageNotFoundComponent } from '../app/pages/page-not-found/page-not-found.component';
 import { HomeComponent } from './pages/home/home.component';
+import { FlxUiDatatableModule, FlxUiDataTable } from 'flx-ui-datatable';
+import { TestComponent } from './pages/test/test.component';
+import { ProductsEditComponent } from './pages/shopkeeper-dashboard/products-edit/products-edit.component';
+import { RegistrationComponent } from './pages/registration/registration.component';
 
 const routes : Route[] = [
   {path: '', component: HomeComponent, pathMatch: 'full', },
@@ -24,6 +28,8 @@ const routes : Route[] = [
     ]
   },
   {path: 'not-found', component: PageNotFoundComponent},
+  {path: 'test', component: TestComponent},
+  {path: 'registration', component: RegistrationComponent},
   {path: '**', redirectTo: '/not-found'}
 ]
 
@@ -36,20 +42,27 @@ const routes : Route[] = [
     OrdersListComponent,
     AddProductComponent,
     PageNotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    TestComponent,
+    ProductsEditComponent,
+    RegistrationComponent
   ],
   imports: [
+    FlxUiDatatableModule,
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule,
     RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})
   ],
-  providers: [{
+  providers: [
+    FlxUiDataTable,
+  {
     provide: HTTP_INTERCEPTORS,
     useClass: BasicAuthInterceptor,
     multi: true
   }],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,8 @@
-import {Component} from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from '../../../providers/products/product.service';
 import { Router } from '@angular/router';
+declare var $ :any;
 
 @Component({
   selector: 'add-product',
@@ -11,10 +11,11 @@ import { Router } from '@angular/router';
 
 })
 export class AddProductComponent {
+  
+  @Output() dataRefractEmitter: EventEmitter<{}> = new EventEmitter();
   closeResult: string;
 
-  constructor(private modalService: NgbModal,
-    private fb: FormBuilder,
+  constructor(private fb: FormBuilder,
     private productService: ProductService,
     private router: Router) {}
 
@@ -45,28 +46,10 @@ export class AddProductComponent {
     };
     this.productService.addProduct(requestJson)
     .subscribe(result=> {
-      this.router.navigate(['/shopkeeper/products']);
+      $('#addproductmodal').modal('hide');
+      this.dataRefractEmitter.emit();
     }, error=> {
       console.log('product adding failed');
     }); 
-    this.modalService.dismissAll();
-  }
-
-  open(addProductContent) {
-    this.modalService.open(addProductContent, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      //this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
-    }
   }
 }
